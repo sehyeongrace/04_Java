@@ -25,8 +25,5 @@ public class Test1 {
 		 * 2) 궁금한 코드 클릭 -> shift + f2
 		 */
 		
-		
-
 	}
-
 }
