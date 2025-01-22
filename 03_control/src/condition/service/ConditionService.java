@@ -109,6 +109,7 @@ public class ConditionService {
 		System.out.println("1. method1()");
 		System.out.println("2. method2()");
 		System.out.println("3. method3()");
+		System.out.println("4. 성적판별기");
 		System.out.println("메뉴 번호 입력 >> ");
 		int input = sc.nextInt();
 		
@@ -117,61 +118,90 @@ public class ConditionService {
 		case 1 : method1(); break;
 		case 2 : method2(); break;
 		case 3 : method3(); break;
+		case 4 : method4(); break;
 		default : System.out.println("없는 메뉴 번호 입니다");
 		}
 	}
 		
 	
+	/** [성적 판별기]
+	 * <pre>
+	 * 중간고사, 기말고사, 과제 점수를 입력 바다 성적 부여
+	 * - 중간고사 (40%), 기말고사(50%), 과제(10%)
+	 * - 입력 시 각각 100점 만점으로 입력 받음
+	 * 
+	 * 95점 이상 : A+
+	 * 90점 이상 : A
+	 * 85점 이상 : B+
+	 * 80점 이상 : B
+	 * 75점 이상 : C+
+	 * 70점 이상 : C
+	 * 65점 이상 : D+
+	 * 60점 이상 : D
+	 * 나머지 : F
+	 * 
+	 * [실행 화면]
+	 * 이름 : 홍길동
+	 * 중간고사 점수(40%) : 100
+	 * 기말고사 점수(50%) : 80
+	 * 과제 점수(10%) : 50
+	 * 
+	 * 홍길동의 최종 점수 : 85.0점 
+	 * 성적 : B+
+	 * </pre>
+	 */
+	
+	
+	
 	public void method4() {
-		/** [성적 판별기]
-		 * <pre>
-		 * 중간고사, 기말고사, 과제 점수를 입력 바다 성적 부여
-		 * - 중간고사 (40%), 기말고사(50%), 과제(10%)
-		 * - 입력 시 각각 100점 만점으로 입력 받음
-		 * 
-		 * 95점 이상 : A+
-		 * 90점 이상 : A
-		 * 85점 이상 : B+
-		 * 80점 이상 : B
-		 * 75점 이상 : C+
-		 * 70점 이상 : C
-		 * 65점 이상 : D+
-		 * 60점 이상 : D
-		 * 나머지 : F
-		 * 
-		 * [실행 화면]
-		 * 이름 : 홍길동
-		 * 중간고사 점수(40%) : 100
-		 * 기말고사 점수(50%) : 80
-		 * 과제 점수(10%) : 50
-		 * 
-		 * 홍길동의 최종 점수 : 85.0점 
-		 * 성적 : B+
-		 * </pre>
-		 */
 		
-		Scanner sc = new Scanner(System.in);
-		int grade = sc.nextInt();
+		System.out.print("이름 : ");
+		String name = sc.next(); // 입력 버퍼에서 다음 문자열(단어) 얻어오기
+	
+		System.out.print("중간고사 점수(40%) : ");
+		int midTerm = sc.nextInt();
 		
-		if(grade >= 95 && grade <=100) {
-			result = "A+";
-		} else if (grade >= 90 && grade <= 95) {
-			result = "A" ;	
-		} else if (grade >= 85 && grade <= 80) {
-			result = "B+";
+		System.out.print("기말고사 점수(50%) : ");
+		int finalTerm = sc.nextInt();
 		
-		} else (){
-			result = "";
+		System.out.println("과제 점수(10%) : ");
+		int report = sc.nextInt();
+		
+		// 점수 합계
+		double sum = (midTerm * 0.4) + (finalTerm * 0.5) + (report * 0.1);
+		
+		String result; // 성적 저장용 변수
+		
+		// Java 지역변수는 초기화 안되면 사용 불가!
+		// System.out.println(result); // 오류 발생
+		
+		
+		
+		// (int)sum/10
+		// - sum을 먼저 int로 강제 형변환 후 10으로 나눔
+		// -> 십의 자리 숫자만 남기는 식
+		switch((int)sum/10) { // switch문 () 내에는 정수/문자열 작성 가능
+		
+		// 하나의 case에 여러 경우를, 기호를 이용해서 작성 가능
+		// (Java만 가능!!! JS 안됨)
+		case 9, 10 : result = "A"; break;
+		case 8 : result = "B"; break;
+		case 7 : result = "C"; break;
+		case 6 : result = "D"; break;
+		default : result = "F";
 		}
 		
-			System.out.print("이름 : ");
-			System.out.print("중간고사 점수(40%) : ");
-			System.out.print("기말고사 점수(50%) : ");
-			System.out.print("과제 점수(10%) : ");
-			System.out.println();
-			System.out.println("의 최종 점수 : ");
-			System.out.println("성적 : ");
+		// [일의 자리 생각]
+		// 합계가 100점 또는  
+		// 60점대 이상 이면서 나머지 5 이상인 경우(65~, 75~, 85~, 95~)
+		if(sum == 100 || (sum >= 60.0 && sum %10 >= 5) ) {
+			result += "+";
+		}
 		
+		// 결과 출력
+		System.out.printf("\n%s의 최종점수 : %.1f점\n", name, sum);
+		System.out.println("성적 : " + result);
+	
 
 	}
 		
