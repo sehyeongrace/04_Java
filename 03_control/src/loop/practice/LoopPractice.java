@@ -124,27 +124,145 @@ public class LoopPractice {
 			}
 		}
 	}
-		
+	
+	// 여기부터 선생님 풀이!!!======================================
 	public void practice7() {
-		Scanner sc = new Scanner(System.in);
+
+		System.out.print("정수 입력 : ");
+		int input = sc.nextInt();
 		
-			System.out.println("정수 입력 : ");
-			int star = sc.nextInt();
+		for(int row=1 ; row<=input ; row++) {
+			// 앞쪽 공백 추가 방법 1
+			
+			for(int blank=1 ; blank<=input-row ; blank++) {
+				System.out.print(" ");
+			}
+			
+			for(int col=1 ; col<=row ; col++) {
+				System.out.print("*");;
+			}
+			
+			System.out.println(); // 줄바꿈
+			
+		}
+					
+		System.out.println("----------------------------------------");
 		
-			if(star > 0) {
-				for(int i = 1; i <= star; i++) {
-					
-					System.out.println("*");
-					
-				System.out.println();
+		// 방법2
+		for(int row=1 ; row<=input ; row++) {
+			
+			for(int col=1 ; col<= input ; col++) {
+				
+				//앞쪽 공백 추가 방법2
+				if(col <= input - row) {
+					System.out.print(" ");
+				}else {
+					System.out.print("*");
 				}
-			}else {
-					System.out.println("오류");
-					
+				
+			}
+			
+			System.out.println(); // 줄바꿈
+			
+		}
 		
 				
 		}
+	
+	
+/**
+정수 입력 : 4
+   *
+  ***
+ *****
+*******
+	 */
+	
+	
+	public void practice11() {
+		
+		
 	}
+	
+	/**
+	 정수 입력 : 5
+*****
+*   *
+*   *
+*   *
+*****
+	 */
+	
+	public void practice12() {
+
+		System.out.println("정수 입력 : ");
+		int input = sc.nextInt();
+		
+		for(int row=1 ; row<= input ; row++) {
+			for(int col=1 ; col<=input ; col++) {
+	
+				if(row ==1 || row == input || col==1 || col == input) {
+				
+				}else {
+				
+				System.out.print("*");
+				}
+			}
+			System.out.println(); // 줄바꿈
+		}
+		
+		
+	}
+	
+	public void practice16() {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("숫자 : ");
+		int num = sc.nextInt();
+		
+		int count = 0; // 소수를 개수를 세기 위한 변수
+		
+		// 2 부터 입력 받은 수 까지 1개씩 접근하는 for문
+		for(int i=2; i<=num ; i++) {
+			boolean flag = true; // 깃발(신호 용도)
+			// true인 경우 : 소수 0
+			// false인 경우 : 소수 X
+			
+			// 1과 자기자신(num)을 뺀 정수를 한 개씩 접근(x)
+			for(int x=2 ; x<i ; x++) {
+				if(i % x == 0) { // 1, 자기자신 빼고 나누어 떨어지는 수 존재
+					flag = false;
+					break;
+				}
+			}
+			if(flag) { // 소수라고 판별된 경우 수행
+				System.out.print(i + " ");
+				count++;
+			}
+		}
+		
+		System.out.printf("\n2부터 %d까지 소수의 개수는 %d개 입니다\n", num, count);
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }		
 
