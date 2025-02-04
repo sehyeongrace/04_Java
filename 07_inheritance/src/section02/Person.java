@@ -104,7 +104,7 @@ public final class Person /* extends Object */ {
 
 	
 	// 부모 메서드
-	public String introduce(String alias) {
+	public final String introduce(String alias) {
 		return String.format(
 			"[Person] 이름은 %s 이고 별명은 %s 입니다", 
 			name, alias);

@@ -3,7 +3,7 @@ package section02;
 /**
  * Person 클래스를 상속 받은 Student 클래스
  */
-public class Student extends Person{
+public class Student extends Person {
 
 	private String schoolName; // 학교명
 	
