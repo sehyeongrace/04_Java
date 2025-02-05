@@ -1,19 +1,20 @@
+
 package service;
 
 import java.util.Random;
 
 import dto.StudentDTO;
 
-/* Service
- * - 프로그램의 실질적인 기능(비즈니스 로직)을
+/* Service 
+ * - 프로그램의 실질적인 기능(비즈니스 로직)을 
  *   제공하는 클래스
  */
 public class StudentService {
-	
-	// StudentDTO 객체 배열 선언 
+
+	// StudentDTO 객체 배열 선언
 	private StudentDTO[] students = new StudentDTO[5];
 	
-	// new StudentDTO[5]
+	// new StudentDTO[5] 
 	// - StudentDTO 참조형 변수 5칸짜리 배열 생성
 	// - 인덱스 : 0 ~ 4
 	// - 각 인덱스 요소의 초기값 : null (참조 객체 없음)
@@ -28,10 +29,8 @@ public class StudentService {
 		students[2] = new StudentDTO("20250003", "훈이", '남');
 		
 		
-		
-	
 		// 자바 제공 난수 발생 객체
-		Random random = new Random();
+		Random random = new Random(); 
 		
 		for(StudentDTO std : students) {
 			
@@ -39,7 +38,7 @@ public class StudentService {
 				continue;
 			}
 			
-			// random.nextInt(101) : 0이상 101 미만의 정수형 난수 생성
+			// random.nextInt(101) : 0 이상 101 미만의 정수형 난수 생성
 			std.setHtml( random.nextInt(101) );
 			std.setCss( random.nextInt(101) );
 			std.setJs( random.nextInt(101) );
@@ -51,9 +50,11 @@ public class StudentService {
 	
 	
 	
+	
+	
 	/**
 	 * students 객체 배열을 반환하는 메서드
-	 * (students에 저장된 주소가 복사되서 반환됨 == 얕은 복사)
+	 * (students에 저장된 주소가 복사되서 반환됨 == 얕은 복사) 
 	 * @return students
 	 */
 	public StudentDTO[] getStudents() {
@@ -196,7 +197,6 @@ public class StudentService {
 	/** students 배열에서 점수 평균 최고, 최저 학생 찾기
 	 * @return result(문자열)
 	 */
-	
 	public String selectMaxMin() {
 		
 		// 점수 평균 최고, 최저 학생의 이름/평균 저장할 변수 선언
@@ -204,18 +204,20 @@ public class StudentService {
 		double maxAvg  = 0.0;
 		
 		String minName = null;
-		double minAvg = 100.0;
+		double minAvg  = 100.0;
 		
-		for(StudentDTO std : students ) {// 항상된 for문
-		
+		for(StudentDTO std : students) { // 향상된 for문
+			
 			if(std == null) { // 더 이상 참조할 학생이 없을 경우
 				break;
 			}
 			
 			// 현재 접근 중인 학생(std)의 평균 구하기
 			int sum 
-				= std.getHtml() + std.getCss(0 + std.getJs() + std.getJava();
+				= std.getHtml() + std.getCss() + std.getJs() + std.getJava();
+			
 			double avg = sum / 4.0;
+			
 			
 			// 저장된 최고, 최저점과 avg 비교
 			if(avg > maxAvg) {
@@ -225,44 +227,44 @@ public class StudentService {
 			
 			if(avg < minAvg) {
 				minAvg = avg;
-				minName = std.getName();			
-		}
+				minName = std.getName();
+			}
 		}
 		
 		// 최고점 : 유리(85.4)
-		// 최저점 : 짱구 (31.6)
-		
-		String result = 
-				String.format(
-						"최고점 : %s(%.1f)\n"
-						+ "최저점 : %s(%.1f)",
-						maxName, maxAvg,
-						minName, minAvg);
-		
+		// 최저점 : 짱구(31.6)
+		String result 
+			= String.format(
+				  "최고점 : %s(%.1f)\n"
+				+ "최저점 : %s(%.1f)", 
+				maxName, maxAvg,
+				minName, minAvg);
 		
 		return result; 
 	}
-	/**index번째 학생 삭제 후 요소 한 칸씩 당기기
+	
+	/** index번째 학생 삭제 후 요소 한 칸씩 당기기
 	 * @param index : 삭제할 index 번호
-	 * @return 삭제된 학생 이름 
+	 * @return 삭제된 학생 이름
 	 */
-public String deleteStudent(int index) {
+	public String deleteStudent(int index) {
+		
+		// 삭제될 학생의 이름 (삭제 전 이름만 백업)
+		String studentName = students[index].getName();
+		
+//	1) students배열에서 입력 받은 index 번째 요소를 null로 바꿈
+		students[index] = null;
+		
+//	2) 삭제된 index 뒤에 요소를 하나씩 당겨오기
+		for(int i = index ; i < students.length - 1 ; i++) {
+			students[i] = students[i+1];
+		}
+		
+		// 마지막 index에 null 대입(제일 끝을 비워 둠)
+		students[students.length - 1] = null;
+		
+		return studentName;
+	}
 	
-	// (삭제될 학생의 이름 삭제 전 이름만 백업)
-	String studentName = students[index].getName();
-	
-	1) students배열세서 입력 받은 index 번째 요소를 null로 바꿈
-			students[index] = null;
-	
-	2)[ 삭제된 index 뒤에 요소를 하나씩 당겨오기
-	    for(int i = index ; i < students.length -1 ; i++ ) {
-	    	students[i] = students [i+1];
-	    }
-			
-	// 마지막 index에 null 대입(제일 끝을 비워 둠)
-	students[students.length -1] = null;
-	
-	return studentName;
-}
 	
 }
