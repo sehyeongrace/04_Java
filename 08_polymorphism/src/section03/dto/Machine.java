@@ -7,4 +7,8 @@ public interface Machine {
 	public abstract void powerOff();
 	
 	int plus(int a, int b);
+	
+	// default int checkNum(int num) {
+	// return num;
+}
 }
