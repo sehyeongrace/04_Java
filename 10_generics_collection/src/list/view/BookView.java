@@ -36,6 +36,8 @@ public class BookView {
 			System.out.println("9. 저자가 일치하는 책 모두 조회하기");
 			System.out.println("10. 검색어가 제목, 저자에 포함된 모든 책 조회하기");
 			
+			System.out.println("11. bookList 제목 오름차순으로 정렬시키기");
+			
 			System.out.println("0. 종료");
 			System.out.println();// 줄 바꿈
 			
@@ -58,6 +60,8 @@ public class BookView {
 			case 8 : selectPublisherAll(); break;
 			case 9 : selectAuthorAll(); break;
 			case 10 : searchBook(); break;
+			
+			case 11 : bookListSorting(); break;
 			
 			case 0: System.out.println("*** 프로그램이 종료됩니다 ***"); break;
 			default: System.out.println("@@@ 메뉴 번호 잘못 입력 @@@");
@@ -343,7 +347,13 @@ public class BookView {
 		 }
 	}
 	
-	
+	private void bookListSorting() {
+		System.out.println("\n### 제목 오름차순 정렬 시키기 ###\n");
+		
+		service.bookListSorting();
+		
+		System.out.println("정렬되었습니다");
+	}
 	
 	
 	
