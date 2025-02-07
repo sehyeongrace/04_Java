@@ -32,7 +32,7 @@ public class GenericsRun {
 		System.out.println(t2.getObj().getClass());
 		
 		// String은 Parent 상속 관계가 아니기 때문에 오류 발햇ㅇ!!
-		TestBox<String> t3 = new TestBox<String>();
+//		TestBox<String> t3 = new TestBox<String>();
 			
 	}
 	

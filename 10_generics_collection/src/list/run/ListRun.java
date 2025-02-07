@@ -1,3 +1,4 @@
+
 package list.run;
 
 import list.service.ListService;
@@ -7,7 +8,7 @@ public class ListRun {
 		
 		ListService service = new ListService();
 		
-		service.test3();
-		
+//		service.test3();
+		service.test4();
 	}
 }

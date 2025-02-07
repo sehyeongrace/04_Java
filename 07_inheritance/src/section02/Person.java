@@ -22,7 +22,7 @@ package section02;
  */
 
 
-public final class Person /* extends Object */ {
+public class Person /* extends Object */ {
 	
 	private String name;
 	private int age;

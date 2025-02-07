@@ -89,12 +89,12 @@ public class Student extends Person {
 	// Cannot override the final method from Person
 	
 	
-	@Override // 오버라이딩 명시 + 성립 조건 맞는지 검사 지시
-	public String introduce(String alias) {
-		return String.format(
-				"[Student가 재정의] 내 이름은 %s, %s 이죠!", 
-				super.getName(), alias);_
-	}
+//	@Override // 오버라이딩 명시 + 성립 조건 맞는지 검사 지시
+//	public String introduce(String alias) {
+//		return String.format(
+//				"[Student가 재정의] 내 이름은 %s, %s 이죠!", 
+//				super.getName(), alias);
+//	}
 	
 	
 	
