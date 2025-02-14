@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 // View : 사용자에게 보여지는 역할을 하는 클래스/객체
 // - 보여줄 화면을 출력 / 필요한 데이터를 입력
@@ -98,20 +99,30 @@ public class MemberView {
 	
 	// ---------------------------------------------------------------
 	// [1. 회원 가입(추가)]
-	public void addMember() throws IOException {
-		System.out.println("\n----- 회원 가입(추가) -----\n");
+	 public void addMember() throws IOException {
+	        System.out.println("\n----- 회원 가입(추가) -----\n");
 
-		System.out.println("이름을 입력하세요 : ");
-		String name = sc.nextLine(); 
-		
-		System.out.println("전화번호를 입력하세요 : ");
-		String phone = sc.nextLine();
-		
-		if(name.isEmpty() || phone.isEmpty()) {
-			System.out.println("이름과 전화번호를 모두 입력해야 합니다.");
-			return;
-		}
-	}
+	        System.out.print("이름 : ");
+	        String name = sc.next();
+
+	        System.out.print("휴대폰 번호(- 제외) : ");
+	        String phone = sc.next();
+
+	        // result == 1 : *** 회원이 추가 되었습니다 ***
+	        // result == 2 : "### 중복되는 휴대폰 번호가 존재합니다 ###"
+	        // 나머지        : *** 다시 입력 해주세요 ***
+	        int result = service.addMember(name, phone);
+
+	        if (result == 1) {
+	            System.out.println("*** 회원이 추가 되었습니다 ***");
+	        } else if (result == 2) {
+	            System.out.println("### 중복되는 휴대폰 번호가 존재합니다 ###");
+	        } else if (result == 3) {
+	            System.out.println("*** 다시 입력 해주세요 ***");
+	        }
+
+
+	    }
 
 	
 	// -------------------------------------------------------------
@@ -134,28 +145,27 @@ public class MemberView {
 	// ------------------------------------------------------------------------
 	// [3. 이름으로 검색(동명이인)]
 	public void selectName() throws IOException {
-		Scanner scanner new Scanner(System.in);
 		System.out.println("\n----- 이름 검색(동명이인 있으면 모두 조회) -----\n");
-		System.out.println("검색할 이름을 입력하세요: ");
-		String searchName = scanner.nextLine().trim();
+		System.out.println("검색할 이름 입력 : ");
+		String name = sc.next(); // next는 문자열 입력 (띄어쓰기 미포함)
 		
-		List<Strings> results = getPeopleByName(searchName);
-		if(results.isEmpty()) {
-			System.out.println("검색 결과가 없습니다.");
+		List<Member> searchList = service.selectName(name);
+		
+		if (searchList.isEmpty()) {
+			System.out.println("### 회원이 존재하지 않습니다###");
 		} else {
-			System.out.println("\n검색된 이름: ");
-			for (String name : results) {
-				System.out.println(name);
+			for (Member member : searchList) {
+				System.out.println(member);
 			}
 		}
-
 	}
+
 
 	// ------------------------------------------------------------
 	// [4. 특정 회원 사용 금액 누적하기]
 	public void updateAmount() throws IOException {
 		System.out.println("\n----- 특정 회원 사용 금액 누적하기 -----\n");
-		
+		int price = sc.nextInt();
 	}
 	
 

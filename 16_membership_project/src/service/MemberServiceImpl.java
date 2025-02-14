@@ -8,7 +8,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /* 왜 Service, Dao 인터페이스를 만들어서 구현했을까?
  * - 인터페이스를 상속 받아 구현하면
@@ -43,55 +42,30 @@ public class MemberServiceImpl implements MemberService{
 
     // 회원 추가
     @Override
-    public boolean addMember(String name, String phone) throws IOException {
-    	for (Member member : memberList) {
-    		if(member.getPhone().equals(phone)) {
-    			return false;
+    public int addMember(String name, String phone) throws IOException {
+   
+    	List<Member> list = dao.getMemberList();
+    	for(Member member:list) {
+    		if(member.getPhone().equals(phone) == true) {
+    			return 2;
     		}
+    		 if(phone.length()!= 11) {
+    			 return 3;
+    		 }
     	}
-    	Member newMember = newMember(name, phone);
-    	memberList.add(newMember);
-    	
-        return true;
-    
+    	dao.addMember(new Member(name, phone, 0, 0));
+    	return 1;
     }
+
 
     // DAO에서 조회한 memberList를 그대로 반환
     @Override
     public List<Member> getMemberList() {
-        
-    	// dao에서 반환 받은 memberList를 그대로 view로 리턴
-    	return dao.getMemberList();
+        return null;
     }
 
 
     // 이름 검색
-    public class MemberService {
-    	public static class Member {
-    		private String name;
-    		
-    		public Member(String name) {
-    			this.name = name;
-    		}
-    		public String getName() {
-    			return name;
-    		}
-    	}
-    public List<Member> selectName(String searchName) {
-    	List<Member> members = List.of(
-    			new Member("홍길동"),
-    			new Member("김철수"),
-    			new Member("홍길동"), 
-    			new Member("이영희")
-    			);
-    	return members.stream()
-    			.filter(member -> member.getName().equals(searchName))
-    			.collect(Collectors.toList());
-    }
-    }
-    
-   
-    
     @Override
     public List<Member> selectName(String searchName) {
     	
